@@ -1,4 +1,6 @@
 /* eslint-disable linebreak-style */
+const { nanoid } = require('nanoid');
+
 class NotesService {
     constructor() {
         // eslint-disable-next-line no-underscore-dangle
@@ -6,9 +8,9 @@ class NotesService {
     }
 
     addNote({ title, body, tags }) {
-        const id = nanoid(16);
-        const createdAt = new Date().toISOString();
-        const updatedAt = createdAt;
+        const id = nanoid(16)
+        const createdAt = new Date().toISOString()
+        const updatedAt = createdAt
 
         const newNote = {
             title, tags, body, id, createdAt, updatedAt
