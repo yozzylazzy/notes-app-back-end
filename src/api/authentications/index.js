@@ -11,10 +11,10 @@ module.exports = {
     validator,
   }) => {
     const authenticationsHandler = new AuthenticationsHandler(
-      authenticationsService,
-      usersService,
-      tokenManager,
-      validator,
+        authenticationsService,
+        usersService,
+        tokenManager,
+        validator,
     );
     server.route(routes(authenticationsHandler));
   },

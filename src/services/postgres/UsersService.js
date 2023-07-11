@@ -1,5 +1,5 @@
-const { nanoid } = require('nanoid');
-const { Pool } = require('pg');
+const {nanoid} = require('nanoid');
+const {Pool} = require('pg');
 const bcrypt = require('bcrypt');
 const InvariantError = require('../../exceptions/InvariantError');
 const NotFoundError = require('../../exceptions/NotFoundError');
@@ -12,7 +12,7 @@ class UsersService {
     this._pool = new Pool();
   }
 
-  async addUser({ username, password, fullname }) {
+  async addUser({username, password, fullname}) {
     // TODO: Verifikasi username, pastikan belum terdaftar.
     await this.verifyNewUsername(username);
     const id = `user-${nanoid(16)}`;
@@ -65,7 +65,7 @@ class UsersService {
     if (!result.rows.length) {
       throw new AuthenticationError('Kredensial yang Anda berikan salah');
     }
-    const { id, password: hashedPassword } = result.rows[0];
+    const {id, password: hashedPassword} = result.rows[0];
     const match = await bcrypt.compare(password, hashedPassword);
     if (!match) {
       throw new AuthenticationError('Kredensial yang Anda berikan salah');
