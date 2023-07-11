@@ -5,8 +5,6 @@ const {
 } = require('./schema');
 const InvariantError = require('../../exceptions/InvariantError');
 
-// ----------------------------------------------------------
-
 const AuthenticationsValidator = {
   validatePostAuthenticationPayload: (payload) => {
     const validationResult = PostAuthenticationPayloadSchema.validate(payload);
