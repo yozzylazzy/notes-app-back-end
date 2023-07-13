@@ -67,8 +67,10 @@ class NotesHandler {
     try {
       const {id} = request.params;
       const {id: credentialId} = request.auth.credentials;
+
       await this._service.verifyNoteOwner(id, credentialId);
       const note = await this._service.getNoteById(id);
+
       return {
         status: 'success',
         data: {
