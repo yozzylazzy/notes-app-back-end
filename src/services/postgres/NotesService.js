@@ -1,7 +1,7 @@
-const { Pool } = require('pg');
-const { nanoid } = require('nanoid');
+const {Pool} = require('pg');
+const {nanoid} = require('nanoid');
 const InvariantError = require('../../exceptions/InvariantError');
-const { mapDBToModel } = require('../../utils');
+const {mapDBToModel} = require('../../utils');
 const NotFoundError = require('../../exceptions/NotFoundError');
 const AuthorizationError = require('../../exceptions/AuthorizationError');
 
@@ -10,7 +10,7 @@ class NotesService {
     this._pool = new Pool();
   }
 
-  async addNote({ title, body, tags, owner }) {
+  async addNote({title, body, tags, owner}) {
     const id = nanoid(16);
     const createdAt = new Date().toISOString();
     const updatedAt = createdAt;
@@ -51,7 +51,7 @@ class NotesService {
     return result.rows.map(mapDBToModel)[0];
   }
 
-  async editNoteById(id, { title, body, tags }) {
+  async editNoteById(id, {title, body, tags}) {
     const updatedAt = new Date().toISOString();
     const query = {
       text: 'UPDATE notes SET title = $1, body = $2, tags = $3, updated_at = $4 WHERE id = $5 RETURNING id',

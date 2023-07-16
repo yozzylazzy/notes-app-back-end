@@ -83,7 +83,7 @@ class NotesHandler {
           status: 'fail',
           message: error.message,
         });
-        response.code(404);
+        response.code(error.statusCode);
         return response;
       }
       // SERVER ERROR!
