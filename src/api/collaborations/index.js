@@ -8,7 +8,7 @@ module.exports = {
     collaborationsService, notesService, validator,
   }) => {
     const collaborationsHandler = new CollaborationsHandler(
-      collaborationsService, notesService, validator,
+        collaborationsService, notesService, validator,
     );
     server.route(routes(collaborationsHandler));
   },

@@ -1,7 +1,7 @@
-const { Pool } = require('pg');
-const { nanoid } = require('nanoid');
+const {Pool} = require('pg');
+const {nanoid} = require('nanoid');
 const InvariantError = require('../../exceptions/InvariantError');
-const { mapDBToModel } = require('../../utils');
+const {mapDBToModel} = require('../../utils');
 const NotFoundError = require('../../exceptions/NotFoundError');
 const AuthorizationError = require('../../exceptions/AuthorizationError');
 
@@ -11,7 +11,7 @@ class NotesService {
     this._collaborationService = collaborationService;
   }
 
-  async addNote({ title, body, tags, owner }) {
+  async addNote({title, body, tags, owner}) {
     const id = nanoid(16);
     const createdAt = new Date().toISOString();
     const updatedAt = createdAt;
@@ -40,7 +40,10 @@ class NotesService {
 
   async getNoteById(id) {
     const query = {
-      text: 'SELECT * FROM notes WHERE id = $1',
+      text: `SELECT notes.*, users.username
+      FROM notes
+      LEFT JOIN users ON users.id = notes.owner
+      WHERE notes.id = $1`,
       values: [id],
     };
     const result = await this._pool.query(query);
@@ -52,7 +55,7 @@ class NotesService {
     return result.rows.map(mapDBToModel)[0];
   }
 
-  async editNoteById(id, { title, body, tags }) {
+  async editNoteById(id, {title, body, tags}) {
     const updatedAt = new Date().toISOString();
     const query = {
       text: 'UPDATE notes SET title = $1, body = $2, tags = $3, updated_at = $4 WHERE id = $5 RETURNING id',
