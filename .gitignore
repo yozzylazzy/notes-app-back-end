@@ -4,3 +4,4 @@ notes-api-webserver.pem
 .prod.env
 rabbitMQ-amazon.txt
 src/api/uploads/file
+User-Permission-1_accessKeys.csv
