@@ -44,6 +44,7 @@ class NotesService {
         GROUP BY notes.id`,
         values: [owner],
       };
+
       const result = await this._pool.query(query);
       const mappedResult = result.rows.map(mapDBToModel);
 
